@@ -21,11 +21,11 @@ document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
   </div>
 
   <div class="direction-pad">
-    <button id="up">↑</button>
+    <button id="up" type="button" aria-label="向上"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 20V4M5 11l7-7 7 7" /></svg></button>
     <div class="direction-row">
-      <button id="left">←</button>
-      <button id="down">↓</button>
-      <button id="right">→</button>
+      <button id="left" type="button" aria-label="向左"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20 12H4M11 5l-7 7 7 7" /></svg></button>
+      <button id="down" type="button" aria-label="向下"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v16M5 13l7 7 7-7" /></svg></button>
+      <button id="right" type="button" aria-label="向右"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 12h16M13 5l7 7-7 7" /></svg></button>
     </div>
   </div>
 `

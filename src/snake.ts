@@ -2,9 +2,9 @@ import type {Vec, Direction, Snake} from './global.ts'
 import {COLS,ROWS} from './global.ts'
 
 
-let onChange: (() => void) | null = null
+let onChange: ((turned?:boolean) => void) | null = null
 
-export function setOnChange(callback: () => void) {
+export function setOnChange(callback: (turned?:boolean) => void) {
   onChange = callback
 }
 
@@ -12,9 +12,11 @@ export function moveSnake (s:Snake, d:Direction) {
     if (s.dir == d) {
         s.body.unshift(nextMove(s,d))
         s.body.pop() 
+        onChange?.()
+    } else {
+        s.dir = d
+        onChange?.(true)
     }
-    s.dir = d
-    onChange?.()
     function nextMove(s:Snake,d:Direction):Vec {
         let v:Vec = {...s.body[0]}
         switch (d) {

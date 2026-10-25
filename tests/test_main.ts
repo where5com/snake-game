@@ -38,13 +38,17 @@ function test_snake() {
     // Draw after restoring snake cells, including the previous tail cell.
     if (food) drawPixl([food], '#f97316')
   }
+  function restartTimer() {
+      if (timer !== undefined) {
+        clearInterval(timer)
+      }
 
+      timer = setInterval(() => {
+        moveSnake(snake, snake.dir)
+      }, 800)
+  }
   function resetGame() {
-    // 先停止舊計時器，避免重複啟動
-    if (timer !== undefined) {
-      clearInterval(timer)
-    }
-
+    restartTimer();
     snake.len = 5
     snake.dir = 'right'
     snake.body = [
@@ -60,19 +64,17 @@ function test_snake() {
     setupBoard(canvas)
     food = genFood(snake)
     render()
-
-    timer = setInterval(() => {
-      moveSnake(snake, snake.dir)
-    }, 800)
   }
 
 
-  setOnChange(() => {
+  setOnChange((turned) => {
+    if (turned) restartTimer()
     if (incLength(snake, food)) {
       food = genFood(snake)
     }
     render()
   })
+
   const up = document.querySelector<HTMLButtonElement>('#up')!
   const down = document.querySelector<HTMLButtonElement>('#down')!
   const left = document.querySelector<HTMLButtonElement>('#left')!
